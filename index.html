@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MusixBooth - Sound tools, redefined.</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Geist', sans-serif;
+            }
+
+            body {
+                background-color: #0e0e11;
+                color: #e0e0e0;
+            }
+
+            .accent {
+                color: #00b7ff;
+            }
+
+            .accent-bg {
+                background-color: #00b7ff;
+            }
+
+            .nav-item {
+                transition: all 0.3s ease;
+            }
+
+            .nav-item:hover {
+                color: #00b7ff;
+                transform: translateX(4px);
+            }
+
+            .nav-item.active {
+                color: #00b7ff;
+                border-left: 2px solid #00b7ff;
+            }
+
+            .module-content {
+                animation: fadeIn 0.4s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .btn-primary {
+                background-color: #00b7ff;
+                color: #0e0e11;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary:hover {
+                background-color: #00b7ff;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 183, 255, 0.3);
+            }
+
+            .card {
+                background-color: #1a1a1f;
+                border: 1px solid #2a2a35;
+                transition: all 0.3s ease;
+            }
+
+            .card:hover {
+                border-color: #00b7ff;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen">
+        <nav class="fixed left-0 top-0 h-screen w-64 bg-[#0e0e11] border-r border-[#2a2a35] p-6">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold accent mb-1">MusixBooth</h1>
+                <p class="text-xs text-gray-500">Sound tools, redefined.</p>
+            </div>
+
+            <ul class="space-y-2">
+                <li>
+                    <a href="#home" class="nav-item active block py-2 px-4 rounded cursor-pointer" data-route="home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#tapper" class="nav-item active block py-2 px-4 rounded cursor-pointer" data-route="tapper">
+                        BPM Tapper
+                    </a>
+                </li>
+                <li>
+                    <a href="#calculator" class="nav-item active block py-2 px-4 rounded cursor-pointer" data-route="calculator">
+                        Delay/Reverb Calc
+                    </a>
+                </li>
+                <li>
+                    <a href="#scale-finder" class="nav-item active block py-2 px-4 rounded cursor-pointer" data-route="scale-finder">
+                        Scale Finder
+                    </a>
+                </li>
+                <li>
+                    <a href="#analyzer" class="nav-item block py-2 px-4 rounded cursor-pointer opacity-50 pointer-events-none" data-route="analyzer">
+                        BPM/Key Analyzer
+                        <span class="text-xs ml-2">(Soon)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#lufs" class="nav-item block py-2 px-4 rounded cursor-pointer opacity-50 pointer-events-none" data-route="lufs">
+                        LUFS Meter
+                        <span class="text-xs ml-2">(Soon)</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="absolute bottom-6 left-6 right-6">
+                <p class="text-xs text-gray-600">v0.0.1 MVP</p>
+            </div>
+        </nav>
+
+        <main class="ml-64 p-8">
+            <div id="app-content" class="module-content">
+                <div id="home-module">
+                    <div class="max-w-4xl">
+                        <h2 class="text-4xl font-bold mb-4">Welcome to MusixBooth</h2>
+                        <p class="text-gray-400 mb-8">Your all-in-one toolkit for music production and audio enginnering.</p>
+
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                            <div class="card p-6 rounded-lg cursor-pointer" onclick="router.navigate('tapper')">
+                                <h3 class="text-xl font-semibold mb-2 accent">BPM Tapper</h3>
+                                <p class="text-sm text-gray-400">Tap in rhythm to calculate tempo instantly.</p>
+                            </div>
+
+                            <div class="card p-6 rounded-lg cursor-pointer" onclick="router.navigate('calculator')">
+                                <h3 class="text-xl font-semibold mb-2 accent">Delay/Reverb Calculator</h3>
+                                <p class="text-sm text-gray-400">Calculate precise timing values for your effects.</p>
+                            </div>
+
+                            <div class="card p-6 rounded-lg cursor-pointer" onclick="router.navigate('scale-finder')">
+                                <h3 class="text-xl font-semibold mb-2 accent">Scale Finder</h3>
+                                <p class="text-sm text-gray-400">Identify scales from selected notes.</p>
+                            </div>
+
+                            <div class="card p-6 rounded-lg opacity-50">
+                                <h3 class="text-xl font-semibold mb-2">BPM/Key Analyzer</h3>
+                                <p class="text-sm text-gray-400">Coming soon - Analyze audio files for BPM and key.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#1a1a1f] border border-[#2a2a35] rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-3">About This Project</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                MusixBooth is designed to streamline your creative workflow by combining essential audio tools in one place.
+                                No more switching between multiple websites - everything you need is right here.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="script/router.js"></script>
+        <script src="script/tapper.js"></script>
+        <script src="script/calculator.js"></script>
+        <script src="script/scaleFinder.js"></script>
+    </body>
+</html>
