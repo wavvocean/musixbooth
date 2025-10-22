@@ -8,7 +8,7 @@ An all-in-one web platform for music producers and audio engineers. Streamline y
 
 ## 📋 Project Status
 
-**Current Version:** `v0.0.4`  
+**Current Version:** `v0.0.4 pre-release`  
 **Development Phase:** ETAP 1 - Foundation & Core Tools  
 **Progress:** Foundation + BPM Tapper Complete ✅
 
@@ -51,6 +51,8 @@ Interactive piano-based scale identification
 - Major/Minor priority, exotic scales secondary
 - Percentage match display
 - Optional audio playback (Web Audio API)
+
+- Public release as **v0.1.0**
 
 ### 📅 Planned (ETAP 2+)
 
@@ -102,7 +104,7 @@ musixbooth/
 
 1. **Clone or download the project**
    ```bash
-   git clone <your-repo-url>
+   git clone <repo-url>
    cd musixbooth
    ```
 
@@ -234,12 +236,13 @@ TBD (To be determined post-launch)
 ## 📞 Contact
 
 - **Project:** MusixBooth
-- **Version:** v0.0.4
+- **Version:** v0.0.4 pre-release
 - **Status:** Active Development
 
 - **Developer:** @wavvocean
 - **Contact mail:** wavvocean@icloud.com
 
 ---
+
 
 **Built with ❤️ for the music production community**
