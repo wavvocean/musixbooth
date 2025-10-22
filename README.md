@@ -8,9 +8,9 @@ An all-in-one web platform for music producers and audio engineers. Streamline y
 
 ## 📋 Project Status
 
-**Current Version:** `v0.0.4 pre-release`  
+**Current Version:** `v0.0.7`  
 **Development Phase:** ETAP 1 - Foundation & Core Tools  
-**Progress:** Foundation + BPM Tapper Complete ✅
+**Progress:** Foundation + BPM Tapper + Delay/Reverb Calculator Complete ✅
 
 ---
 
@@ -34,15 +34,22 @@ Tap-to-tempo calculator with real-time BPM detection
 - Sync with Delay/Reverb Calculator via localStorage
 - Toast notifications for user feedback
 
-### 🚧 In Development
-
 #### **v0.0.5-v0.0.7: Delay/Reverb Calculator**
 Calculate precise timing values for audio effects
-- BPM input with Tapper sync
-- Notes/Dotted/Triplet calculations (1/1 to 1/128)
-- Reverb presets (Hall, Room, Tight Ambience)
-- Values in ms and Hz
-- One-click copy functionality
+- BPM input with automatic Tapper sync
+- Three calculation modes: Notes, Dotted, Triplet
+- Complete delay table (1/1 to 1/128)
+- Values displayed in milliseconds (ms) and frequency (Hz)
+- One-click copy for each delay value
+- Four reverb presets:
+   - Large Hall (predelay 40ms, decay 2500ms)
+   - Medium Room (predelay 20ms, decay 1200ms)
+   - Small Room (predelay 10ms, decay 600ms)
+   - Tight Ambience (predelay 5ms, decay 300ms)
+- Automatic total time calculation
+- Real-time updates on BPM/mode changes
+
+### 🚧 In Development
 
 #### **v0.0.8-v0.0.10: Scale Finder**
 Interactive piano-based scale identification
@@ -164,7 +171,7 @@ musixbooth/
 ### ✅ ETAP 1 - MVP Foundation (v0.0.1 - v0.0.14)
 - [x] v0.0.1-v0.0.2: Project structure + routing system
 - [x] v0.0.3-v0.0.4: BPM Tapper (full functionality)
-- [ ] v0.0.5-v0.0.7: Delay/Reverb Calculator
+- [x] v0.0.5-v0.0.7: Delay/Reverb Calculator
 - [ ] v0.0.8-v0.0.10: Scale Finder
 - [ ] v0.0.11-v0.0.14: Audio infrastructure preparation
 
@@ -198,17 +205,20 @@ musixbooth/
 **For Music Producers:**
 - Quickly match project tempo to reference tracks
 - Calculate delay times for creative effects
+- Sync reverb decay to track tempo
 - Identify scales from melody ideas
 
 **For Audio Engineers:**
 - Precise timing calculations for mixing
-- Analyze loudness standards (LUFS)
-- Reference tool during mastering sessions
+- Calculate pre-delay for vocals/instruments
+- Match effect times to song groove
+- Analyze loudness standards (LUFS - coming soon)
 
 **For Both:**
 - No more tab-switching between multiple websites
 - All tools accessible offline (once loaded)
 - Fast, distraction-free workflow
+- BPM sync across all modules
 
 ---
 
@@ -236,13 +246,12 @@ TBD (To be determined post-launch)
 ## 📞 Contact
 
 - **Project:** MusixBooth
-- **Version:** v0.0.4 pre-release
+- **Version:** v0.0.7 pre-release
 - **Status:** Active Development
 
 - **Developer:** @wavvocean
 - **Contact mail:** wavvocean@icloud.com
 
 ---
-
 
 **Built with ❤️ for the music production community**
