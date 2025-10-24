@@ -41,11 +41,7 @@ Calculate precise timing values for audio effects
 - Complete delay table (1/1 to 1/128)
 - Values displayed in milliseconds (ms) and frequency (Hz)
 - One-click copy for each delay value
-- Four reverb presets:
-   - Large Hall (predelay 40ms, decay 2500ms)
-   - Medium Room (predelay 20ms, decay 1200ms)
-   - Small Room (predelay 10ms, decay 600ms)
-   - Tight Ambience (predelay 5ms, decay 300ms)
+- Four reverb presets: Large Hall, Medium Room, Small Room and Tight Ambience
 - Automatic total time calculation
 - Real-time updates on BPM/mode changes
 
@@ -259,5 +255,6 @@ TBD (To be determined post-launch)
 - **Contact mail:** wavvocean@icloud.com
 
 ---
+
 
 **Built with ❤️ for the music production community**
