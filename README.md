@@ -8,7 +8,7 @@ An all-in-one web platform for music producers and audio engineers. Streamline y
 
 ## 📋 Project Status
 
-**Current Version:** `v0.0.7.1 pre-release`  
+**Current Version:** `v0.0.7.2 pre-release`  
 **Development Phase:** ETAP 1 - Foundation & Core Tools  
 **Progress:** Foundation + BPM Tapper + Delay/Reverb Calculator Complete ✅
 
@@ -49,8 +49,11 @@ Calculate precise timing values for audio effects
 - Automatic total time calculation
 - Real-time updates on BPM/mode changes
 
-#### **v0.0.7.1: Delay/Reverb Calculator Improvement**
-Correcting errors related to incorrect calculation of reverb times
+#### **v0.0.7.1-v0.0.7.2: Webapp Improvements**
+Minor tweaks to the backend and UI
+- Correcting errors related to incorrect calculation of reverb times
+- Redesigned layout on mobile devices
+
 
 ### 🚧 In Development
 
@@ -249,7 +252,7 @@ TBD (To be determined post-launch)
 ## 📞 Contact
 
 - **Project:** MusixBooth
-- **Version:** v0.0.7.1 pre-release
+- **Version:** v0.0.7.2 pre-release
 - **Status:** Active Development
 
 - **Developer:** @wavvocean

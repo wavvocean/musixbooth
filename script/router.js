@@ -6,6 +6,20 @@ const router = {
         // Update URL without reload
         history.pushState(null, '', `#${route}`);
         this.loadRoute(route);
+
+        if (window.innerWidth <= 768) {
+            this.closeMobileMenu();
+        }
+    },
+
+    closeMobileMenu() {
+        const nav = document.getElementById('nav-sidebar');
+        const overlay = document.getElementById('nav-overlay');
+        const hamburger = document.getElementById('hamburger');
+
+        if (nav) nav.classList.remove('open');
+        if (overlay) overlay.classList.remove('show');
+        if (hamburger) hamburger.classList.remove('open');
     },
     
     loadRoute(route) {
@@ -58,6 +72,25 @@ const router = {
 
 // Handle navigation clicks
 document.addEventListener('DOMContentLoaded', () => {
+
+    const hamburger = document.getElementById('hamburger');
+    const navSidebar = document.getElementById('nav-sidebar');
+    const navOverlay = document.getElementById('nav-overlay');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navSidebar.classList.toggle('open');
+            navOverlay.classList.toggle('show');
+        });
+    }
+
+    if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+            router.closeMobileMenu();
+        });
+    }
+
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
