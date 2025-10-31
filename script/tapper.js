@@ -3,9 +3,23 @@ const tapperModule = {
     bpm: 0,
     resetTimeout: null,
     resetDelay: 3000,
+    spacebarHandler: null,
+    isInitialized: false,
 
     init() {
+        if (this.isInitialized) {
+            return;
+        }
         this.setupEventListeners();
+        this.isInitialized = true;
+    },
+
+    cleanup() {
+        if (this.spacebarHandler) {
+            document.removeEventListener('keydown', this.spacebarHandler);
+            this.spacebarHandler = null;
+        }
+        this.isInitialized = false;
     },
 
     setupEventListeners() {
@@ -13,30 +27,38 @@ const tapperModule = {
         if (tapCircle) {
             tapCircle.addEventListener('click', () => this.handleTap());
         }
-
-        document.addEventListener('keydown', (e) => {
+        this.spacebarHandler = (e) => {
             if (e.code === 'Space' && router.currentRoute === 'tapper') {
                 e.preventDefault();
                 this.handleTap();
             }
-        });
+        };
+
+        document.removeEventListener('keydown', this.spacebarHandler);
+        document.addEventListener('keydown', this.spacebarHandler);
 
         const resetBtn = document.getElementById('reset-btn');
         if (resetBtn) {
-            resetBtn.addEventListener('click', () => this.resetDelay());
+            resetBtn.addEventListener('click', () => this.reset());
         }
-
         const copyBtn = document.getElementById('copy-btn');
         if (copyBtn) {
-            copyBtn.addEventListener('click', () => this.copyBPM());
+            copyBtn.addEventListener('click', () => this.copyBtn());
         }
     },
 
     handleTap() {
         const now = Date.now();
+
+        if (this.taps.length > 0) {
+            const lastTap = this.taps[this.taps.length - 1];
+            if (now - lastTap < 50) {
+                return;
+            }
+        }
         this.taps.push(now);
 
-        const circle =document.getElementById('tap-circle');
+        const circle = document.getElementById('tap-circle');
         if (circle) {
             circle.classList.remove('pulse-animation');
             void circle.offsetWidth;
@@ -61,8 +83,19 @@ const tapperModule = {
             intervals.push(this.taps[i] - this.taps[i - 1]);
         }
 
+        if (intervals.length >= 3) {
+            const sorted = [...intervals].sort((a, b) => a - b);
+            const median = sorted[Math.floor(sorted.length / 2)];
+            intervals = intervals.filter(interval => {
+                return interval > median * 0.5 && interval < median * 2;
+            });
+        }
+
         const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
         this.bpm = Math.round(60000 / avgInterval);
+
+        if (this.bpm < 20) this.bpm = 20;
+        
         this.updateDisplay();
     },
 

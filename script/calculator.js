@@ -2,9 +2,8 @@
 
 const calculatorModule = {
     bpm: 120,
-    currentMode: 'notes', // 'notes', 'dotted', 'triplet'
+    currentMode: 'notes',
     
-    // Note divisions for calculations
     divisions: [
         { name: '1/1', value: 1 },
         { name: '1/2', value: 2 },
@@ -16,30 +15,29 @@ const calculatorModule = {
         { name: '1/128', value: 128 }
     ],
     
-    // Reverb presets (now BPM-synced)
     reverbPresets: {
         hall: {
             name: 'Large Hall',
-            predelayBeats: 1/8,      // 1/8 note
-            decayBeats: 2,           // 2 bars (8 beats)
+            predelayBeats: 1/8,
+            decayBeats: 2,
             color: '#00b7ff'
         },
         room: {
             name: 'Medium Room',
-            predelayBeats: 1/16,     // 1/16 note
-            decayBeats: 1,           // 1 bar (4 beats)
+            predelayBeats: 1/16,
+            decayBeats: 1,
             color: '#00ff88'
         },
         small: {
             name: 'Small Room',
-            predelayBeats: 1/32,     // 1/32 note
-            decayBeats: 0.5,         // 1/2 note (2 beats)
+            predelayBeats: 1/32,
+            decayBeats: 0.5,
             color: '#ffaa00'
         },
         tight: {
             name: 'Tight Ambience',
-            predelayBeats: 1/64,     // 1/64 note
-            decayBeats: 0.25,        // 1/4 note (1 beat)
+            predelayBeats: 1/64,
+            decayBeats: 0.25,
             color: '#ff5555'
         }
     },
@@ -53,10 +51,14 @@ const calculatorModule = {
         
         this.setupEventListeners();
         this.calculate();
+        
+        // Apply default reverb preset (Large Hall)
+        setTimeout(() => {
+            this.applyReverbPreset('hall');
+        }, 100);
     },
     
     setupEventListeners() {
-        // BPM input
         const bpmInput = document.getElementById('calc-bpm');
         if (bpmInput) {
             bpmInput.addEventListener('input', (e) => {
@@ -65,19 +67,16 @@ const calculatorModule = {
             });
         }
         
-        // Mode buttons - use event delegation
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('mode-btn')) {
                 this.currentMode = e.target.dataset.mode;
                 
-                // Update active state
                 document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 
                 this.calculate();
             }
             
-            // Reverb preset buttons - use event delegation
             if (e.target.classList.contains('reverb-preset-btn')) {
                 const preset = e.target.dataset.preset;
                 this.applyReverbPreset(preset);
@@ -86,10 +85,8 @@ const calculatorModule = {
     },
     
     calculate() {
-        // Calculate one beat in milliseconds
         const oneBeatMs = (60 / this.bpm) * 1000;
         
-        // Update delay table
         this.divisions.forEach(division => {
             let ms;
             
@@ -107,12 +104,13 @@ const calculatorModule = {
             
             const hz = 1000 / ms;
             
-            // Update DOM
             const msCell = document.getElementById(`delay-ms-${division.value}`);
             const hzCell = document.getElementById(`delay-hz-${division.value}`);
+            const totalCell = document.getElementById(`delay-total-${division.value}`);
             
             if (msCell) msCell.textContent = ms.toFixed(2);
             if (hzCell) hzCell.textContent = hz.toFixed(2);
+            if (totalCell) totalCell.textContent = ms.toFixed(2);
         });
     },
     
@@ -120,15 +118,12 @@ const calculatorModule = {
         const preset = this.reverbPresets[presetKey];
         if (!preset) return;
         
-        // Calculate one beat in milliseconds
         const oneBeatMs = (60 / this.bpm) * 1000;
         
-        // Calculate predelay and decay based on BPM
         const predelay = Math.round((oneBeatMs / 4) * preset.predelayBeats);
         const decay = Math.round((oneBeatMs * 4) * preset.decayBeats);
         const total = predelay + decay;
         
-        // Update reverb display
         document.getElementById('reverb-preset-name').textContent = preset.name;
         document.getElementById('reverb-predelay').textContent = predelay;
         document.getElementById('reverb-predelay-note').textContent = this.formatBeats(preset.predelayBeats);
@@ -136,7 +131,6 @@ const calculatorModule = {
         document.getElementById('reverb-decay-bars').textContent = `${preset.decayBeats} ${preset.decayBeats === 1 ? 'bar' : 'bars'}`;
         document.getElementById('reverb-total').textContent = total;
         
-        // Visual feedback
         document.querySelectorAll('.reverb-preset-btn').forEach(btn => {
             btn.classList.remove('active');
         });
@@ -235,8 +229,9 @@ function loadCalculatorModule() {
                         <thead>
                             <tr class="border-b border-[#2a2a35]">
                                 <th class="text-left py-3 px-4 font-semibold">Note</th>
-                                <th class="text-right py-3 px-4 font-semibold">Milliseconds (ms)</th>
+                                <th class="text-right py-3 px-4 font-semibold">Delay Time (ms)</th>
                                 <th class="text-right py-3 px-4 font-semibold">Frequency (Hz)</th>
+                                <th class="text-right py-3 px-4 font-semibold">Total Time (ms)</th>
                                 <th class="text-right py-3 px-4 font-semibold">Action</th>
                             </tr>
                         </thead>
@@ -246,10 +241,10 @@ function loadCalculatorModule() {
                                     <td class="py-3 px-4 font-medium">1/${div}</td>
                                     <td class="text-right py-3 px-4 font-mono accent" id="delay-ms-${div}">--</td>
                                     <td class="text-right py-3 px-4 font-mono text-gray-400" id="delay-hz-${div}">--</td>
+                                    <td class="text-right py-3 px-4 font-mono accent" id="delay-total-${div}">--</td>
                                     <td class="text-right py-3 px-4">
                                         <button 
                                             class="copy-delay-btn text-xs px-3 py-1 bg-[#00b7ff] text-[#0e0e11] rounded hover:bg-[#00d4ff] transition-all font-medium"
-                                            data-value-ms="#delay-ms-${div}"
                                             onclick="calculatorModule.copyToClipboard(document.getElementById('delay-ms-${div}').textContent + ' ms', 'Delay time copied!')"
                                         >
                                             Copy
@@ -308,7 +303,6 @@ function loadCalculatorModule() {
         </div>
     `;
     
-    // Add custom styles for active states
     const style = document.createElement('style');
     style.textContent = `
         .mode-btn.active {
@@ -322,7 +316,6 @@ function loadCalculatorModule() {
     `;
     document.head.appendChild(style);
     
-    // Initialize calculator after DOM is ready
     setTimeout(() => {
         calculatorModule.init();
     }, 0);
