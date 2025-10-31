@@ -8,7 +8,7 @@ An all-in-one web platform for music producers and audio engineers. Streamline y
 
 ## 📋 Project Status
 
-**Current Version:** `v0.0.7.5 pre-release`  
+**Current Version:** `v0.0.8 pre-release`  
 **Development Phase:** ETAP 1 - Foundation & Core Tools  
 **Progress:** Foundation + BPM Tapper + Delay/Reverb Calculator Complete ✅
 
@@ -52,16 +52,17 @@ Minor tweaks to the backend and UI
 - Improved space bar functionality in the bpm tapper module
 - fixed display of times in delay/reverb calculator
 
-
-### 🚧 In Development
-
-#### **v0.0.8-v0.0.10: Scale Finder**
+#### **v0.0.8: Scale Finder**
 Interactive piano-based scale identification
 - Click notes on virtual keyboard
 - Automatic scale matching algorithm
 - Major/Minor priority, exotic scales secondary
 - Percentage match display
-- Optional audio playback (Web Audio API)
+
+### 🚧 In Development
+
+#### **v0.0.9: Scale Finder**
+- Play the sound of a piano at a pitch corresponding to the pitch of the selected key on the virtual piano
 
 - Public release as **v0.1.0**
 
@@ -176,7 +177,7 @@ musixbooth/
 - [x] v0.0.1-v0.0.2: Project structure + routing system
 - [x] v0.0.3-v0.0.4: BPM Tapper (full functionality)
 - [x] v0.0.5-v0.0.7: Delay/Reverb Calculator
-- [ ] v0.0.8-v0.0.10: Scale Finder
+- [x] v0.0.8: Scale Finder
 - [ ] v0.0.11-v0.0.14: Audio infrastructure preparation
 
 ### 🔄 ETAP 2 - Audio Analysis (v0.1.x)
@@ -250,7 +251,7 @@ TBD (To be determined post-launch)
 ## 📞 Contact
 
 - **Project:** MusixBooth
-- **Version:** v0.0.7.5 pre-release
+- **Version:** v0.0.8 pre-release
 - **Status:** Active Development
 
 - **Developer:** @wavvocean
